@@ -94,8 +94,23 @@ local function SkinIcon(self) -- Thanks to SinaC
 	SkinButton(SkilletRecipeDifficultyButton)
 	SkinButton(SkilletExpandAllButton)
 	SkinButton(SkilletCollapseAllButton)
-	--SkinButton(SkilletShowOptionsButton)
-
+	cSkinButton(SkilletShowOptionsButton)
+	SkilletShowOptionsButton:SetHeight(16)
+	SkilletShowOptionsButton:SetWidth(12)
+	SkilletShowOptionsButton:SetPoint("RIGHT", SkilletFrameCloseButton, "LEFT", 3, 0)
+	
+	if not SkilletShowOptionsButton.text then
+		SkilletShowOptionsButton.text = SkilletShowOptionsButton:CreateFontString(nil, 'OVERLAY')
+		if ElvUI then
+			SkilletShowOptionsButton.text:SetFont([[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]], 12, 'OUTLINE')
+			else
+			SkilletShowOptionsButton.text:SetFont([[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]], 12, 'OUTLINE')
+		end
+		SkilletShowOptionsButton.text:SetText(" ?")
+		SkilletShowOptionsButton.text:SetTextColor(1, 0, 0)	
+		SkilletShowOptionsButton.text:SetJustifyH('CENTER')
+		SkilletShowOptionsButton.text:SetPoint('CENTER', SkilletShowOptionsButton, 'CENTER')
+	end
 end
 
 local function SkinShopping(self)
@@ -182,11 +197,15 @@ local function SkilletFrameOnShow(self)
 		SkilletHideUncraftableRecipes:SetPoint("BOTTOMRIGHT", SkilletSkillListParent, "TOPRIGHT", -5, 5)
 		SkilletFrameCloseButton:ClearAllPoints()
 		SkilletFrameCloseButton:SetPoint("TOPRIGHT", SkilletFrame, "TOPRIGHT", 0, 0)
+		SkilletTradeSkillLinkButton:SetPoint("RIGHT", SkilletShowOptionsButton, "LEFT", 0, 0)
+		
 -- Skin Tooltips		
 		SkilletTradeskillTooltip:StripTextures()
 		SkilletTradeskillTooltip:SetTemplate("Default")
+		
 -- Scrollbar
 		cSkinScrollBar(SkilletQueueListScrollBar)
+		
 -- Queue Delete Buttons		
 	for i=1,3 do
 		local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
