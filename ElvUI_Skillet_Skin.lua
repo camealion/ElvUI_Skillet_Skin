@@ -6,10 +6,36 @@
 else
 	local T, C, L = unpack(Tukui)
 	c = C
+	t = T
 	--DEFAULT_CHAT_FRAME:AddMessage("Tukui is loaded")
 end
 
 local Skillet = _G.Skillet
+
+function SetModifiedBackdrop(self)
+	if Tukui then
+		local color = RAID_CLASS_COLORS[t.myclass]
+		self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
+		self:SetBackdropBorderColor(color.r, color.g, color.b)
+	else
+		if self.backdrop then self = self.backdrop end
+		self:SetBackdropBorderColor(unpack(c["media"].rgbvaluecolor))
+	end
+end
+
+function SetOriginalBackdrop(self)
+	if Tukiu then
+		local color = RAID_CLASS_COLORS[t.myclass]
+		if c["general"].classcolortheme == true then
+			self:SetBackdropBorderColor(color.r, color.g, color.b)
+		else
+			self:SetTemplate("Default")
+		end
+	else
+		if self.backdrop then self = self.backdrop end
+		self:SetBackdropBorderColor(unpack(c["media"].bordercolor))	
+	end
+end
 
 local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
 	if not ButtonOrSpellID then return end
@@ -33,7 +59,9 @@ local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
 		texture:Point("TOPLEFT", 2, -2)
 		texture:Point("BOTTOMRIGHT", -2, 2)
 		texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
+		button:SetHighlightTexture(nil)
+		button:HookScript("OnEnter", SetModifiedBackdrop)
+		button:HookScript("OnLeave", SetOriginalBackdrop)
 		end
 	end
 end
