@@ -310,7 +310,7 @@ local SkinSkillet = CreateFrame("Frame")
 			if ElvUI then
 				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowup.tga]])
 			else
-				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\Tukui\media\textures\arrowup.tga]])
+				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
 			end
 			SkilletSortAscButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
 		end
@@ -324,7 +324,7 @@ local SkinSkillet = CreateFrame("Frame")
 			if ElvUI then
 				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowdown.tga]])
 			else
-				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\Tukui\media\textures\arrowdown.tga]])
+				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
 			end
 			SkilletSortDescButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
 		end
