@@ -1,0 +1,10 @@
+## Interface: 40300
+## Title: |cff1784d1ElvUI|r Skillet Skin
+## Notes: Skillet Addon Skin For ElvUI/Tukui
+## Author: Camealion
+## Version: 0.8
+## RequiredDeps: Skillet
+## OptionalDeps: Tukui, ElvUI
+
+ElvUI_Skillet_Skin.lua
+!Functions.lua
