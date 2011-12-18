@@ -11,207 +11,62 @@ end
 
 local Skillet = _G.Skillet
 
-function SkinIcon(self)
-	
-	if SkilletDoBasic_Campfire then 		
-			SkilletDoBasic_Campfire:StripTextures()
-			SkilletDoBasic_Campfire:SetTemplate("Default", true)
-					SkilletDoBasic_Campfire.texture = SkilletDoBasic_Campfire:CreateTexture(nil, 'OVERLAY')
-					SkilletDoBasic_Campfire.texture:Point("TOPLEFT", 2, -2)
-					SkilletDoBasic_Campfire.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletDoBasic_Campfire.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\Spell_Fire_Fire.tga]])
-					SkilletDoBasic_Campfire:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
+local function SkinButton(ButtonOrSpellID) -- this function was bugged
+	if not ButtonOrSpellID then return end
+	local button
+		if type(ButtonOrSpellID) == "number" then
+			local player = UnitName("player")
+			local buttonName = "SkilletFrameTradeButton-"..player.."-"..tostring(ButtonOrSpellID)
+			button = _G[buttonName]
+		else
+			button = ButtonOrSpellID
+		end
+	if button then
+		local texture = button:GetNormalTexture()
+			if not texture then
+			texture = _G[button:GetName().."Icon"]
 	end
-	if SkilletDoProspecting then 		
-			SkilletDoProspecting:StripTextures()
-			SkilletDoProspecting:SetTemplate("Default", true)
-					SkilletDoProspecting.texture = SkilletDoProspecting:CreateTexture(nil, 'OVERLAY')
-					SkilletDoProspecting.texture:Point("TOPLEFT", 2, -2)
-					SkilletDoProspecting.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletDoProspecting.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_misc_gem_bloodgem_01.tga]])
-					SkilletDoProspecting:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
+	if texture then
+		button:SetTemplate("Default", true)
+		texture:ClearAllPoints()
+		texture:Point("TOPLEFT", 2, -2)
+		texture:Point("BOTTOMRIGHT", -2, 2)
+		texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
+		end
 	end
-	if SkilletDoDisenchant then 		
-			SkilletDoDisenchant:StripTextures()
-			SkilletDoDisenchant:SetTemplate("Default", true)
-					SkilletDoDisenchant.texture = SkilletDoDisenchant:CreateTexture(nil, 'OVERLAY')
-					SkilletDoDisenchant.texture:Point("TOPLEFT", 2, -2)
-					SkilletDoDisenchant.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletDoDisenchant.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_enchant_disenchant.tga]])
-					SkilletDoDisenchant:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-	if SkilletDoMilling then 		
-			SkilletDoMilling:StripTextures()
-			SkilletDoMilling:SetTemplate("Default", true)
-					SkilletDoMilling.texture = SkilletDoMilling:CreateTexture(nil, 'OVERLAY')
-					SkilletDoMilling.texture:Point("TOPLEFT", 2, -2)
-					SkilletDoMilling.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletDoMilling.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\ability_miling.tga]])
-					SkilletDoMilling:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end	
-		
-local player = UnitName("player")
-local buttonName = "SkilletFrameTradeButton-"..player.."-3908" -- Tailoring
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\trade_tailoring.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end		
-local buttonName = "SkilletFrameTradeButton-"..player.."-53428" -- Runforgeing
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\spell_deathknight_frozenruneweapon.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end	
-local buttonName = "SkilletFrameTradeButton-"..player.."-3273" -- Firstaid
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\spell_holy_sealofsacrifice.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end	
-local buttonName = "SkilletFrameTradeButton-"..player.."-2656" -- Smelting
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\spell_fire_flameblades.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-2550" -- Cooking
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_misc_food_15.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-45357" -- Inscription
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_inscription_tradeskill01.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-2018" -- Blacksmithing
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\trade_blacksmithing.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-2259" -- Alchemy
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\trade_alchemy.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-7411" -- Enchanting
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\trade_engraving.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-4036" -- Engineering
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\trade_engineering.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-local buttonName = "SkilletFrameTradeButton-"..player.."-25229" -- Jewelcrafting
-local button = _G[buttonName]
-	if button then 		
-			button:StripTextures()
-			button:SetTemplate("Default", true)
-					button.texture = button:CreateTexture(nil, 'OVERLAY')
-					button.texture:Point("TOPLEFT", 2, -2)
-					button.texture:Point("BOTTOMRIGHT", -2, 2)
-					button.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_misc_gem_01.tga]])
-					button:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
--- Stop this FPS Killer	
-		local icon = _G["SkilletHideUncraftableRecipes"]
-		icon:SetScript("OnUpdate", nil)	
+end
 
-	if SkilletHideUncraftableRecipes then 		
-			SkilletHideUncraftableRecipes:StripTextures()
-			SkilletHideUncraftableRecipes:SetTemplate("Default", true)
-					SkilletHideUncraftableRecipes.texture = SkilletHideUncraftableRecipes:CreateTexture(nil, 'OVERLAY')
-					SkilletHideUncraftableRecipes.texture:Point("TOPLEFT", 2, -2)
-					SkilletHideUncraftableRecipes.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletHideUncraftableRecipes.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\inv_misc_bag_27.tga]])
-					SkilletHideUncraftableRecipes:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-	if SkilletRecipeDifficultyButton then 		
-			SkilletRecipeDifficultyButton:StripTextures()
-			SkilletRecipeDifficultyButton:SetTemplate("Default", true)
-					SkilletRecipeDifficultyButton.texture = SkilletRecipeDifficultyButton:CreateTexture(nil, 'OVERLAY')
-					SkilletRecipeDifficultyButton.texture:Point("TOPLEFT", 2, -2)
-					SkilletRecipeDifficultyButton.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletRecipeDifficultyButton.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\skill_colors.tga]])
-					SkilletRecipeDifficultyButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end	
-	if SkilletExpandAllButton then 		
-			SkilletExpandAllButton:StripTextures()
-			SkilletExpandAllButton:SetTemplate("Default", true)
-					SkilletExpandAllButton.texture = SkilletExpandAllButton:CreateTexture(nil, 'OVERLAY')
-					SkilletExpandAllButton.texture:Point("TOPLEFT", 2, -2)
-					SkilletExpandAllButton.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletExpandAllButton.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\expand_icon.tga]])
-					SkilletExpandAllButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end
-	if SkilletCollapseAllButton then 		
-			SkilletCollapseAllButton:StripTextures()
-			SkilletCollapseAllButton:SetTemplate("Default", true)
-					SkilletCollapseAllButton.texture = SkilletCollapseAllButton:CreateTexture(nil, 'OVERLAY')
-					SkilletCollapseAllButton.texture:Point("TOPLEFT", 2, -2)
-					SkilletCollapseAllButton.texture:Point("BOTTOMRIGHT", -2, 2)
-					SkilletCollapseAllButton.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\collapse_icon.tga]])
-					SkilletCollapseAllButton:SetHighlightTexture("Interface/Buttons/ButtonHilight-Square")
-	end			
+local function SkinIcon(self)
+
+	if SkilletDoBasic_Campfire then SkinButton(SkilletDoBasic_Campfire) end
+	if SkilletDoProspecting then SkinButton(SkilletDoProspecting) end
+	if SkilletDoDisenchant then SkinButton(SkilletDoDisenchant) end
+	if SkilletDoMilling then SkinButton(SkilletDoMilling) end
+
+	
+	if 3908 then SkinButton(3908) end -- Tailoring
+	if 53428 then SkinButton(53428) end -- Runeforging
+	if 3273 then SkinButton(3273) end -- Firstaid
+	if 2656 then SkinButton(2656) end -- Smelting
+	if 2550 then SkinButton(2550) end -- Cooking
+	if 45357 then SkinButton(45357) end -- Inscription
+	if 2018 then SkinButton(2018) end -- Blacksmithing
+	if 2259 then SkinButton(2259) end -- Alchemy
+	if 7411 then SkinButton(7411) end -- Enchanting
+	if 4036 then SkinButton(4036) end -- Engineering
+	if 25229 then SkinButton(25229) end -- Jewelcrafting 
+
+-- Stop this FPS Killer
+	local icon = _G["SkilletHideUncraftableRecipes"]
+	icon:SetScript("OnUpdate", nil)
+
+	SkinButton(SkilletHideUncraftableRecipes)
+	SkinButton(SkilletRecipeDifficultyButton)
+	SkinButton(SkilletExpandAllButton)
+	SkinButton(SkilletCollapseAllButton)
+	--SkinButton(SkilletShowOptionsButton)
+
 end
 
 local function SkinShopping(self)
@@ -452,7 +307,11 @@ local SkinSkillet = CreateFrame("Frame")
 			SkilletSortAscButton.texture = SkilletSortAscButton:CreateTexture(nil, 'OVERLAY')
 			SkilletSortAscButton.texture:Point("TOPLEFT", 2, -2)
 			SkilletSortAscButton.texture:Point("BOTTOMRIGHT", -2, 2)
-			SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\arrowup.tga]])
+			if ElvUI then
+				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowup.tga]])
+			else
+				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\Tukui\media\textures\arrowup.tga]])
+			end
 			SkilletSortAscButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
 		end
 -- Sort down Button
@@ -462,7 +321,11 @@ local SkinSkillet = CreateFrame("Frame")
 			SkilletSortDescButton.texture = SkilletSortDescButton:CreateTexture(nil, 'OVERLAY')
 			SkilletSortDescButton.texture:Point("TOPLEFT", 2, -2)
 			SkilletSortDescButton.texture:Point("BOTTOMRIGHT", -2, 2)
-			SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\ElvUI_Skillet_Skin\media\textures\arrowdown.tga]])
+			if ElvUI then
+				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowdown.tga]])
+			else
+				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\Tukui\media\textures\arrowdown.tga]])
+			end
 			SkilletSortDescButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
 		end
 	
