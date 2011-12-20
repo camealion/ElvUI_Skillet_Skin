@@ -52,6 +52,7 @@ local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
 			if not texture then
 			texture = _G[button:GetName().."Icon"]
 	end
+	
 	if texture then
 		button:SetTemplate("Default", true)
 		texture:SetDrawLayer('OVERLAY') -- Make sure we can see the Icons.
@@ -66,7 +67,39 @@ local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
 	end
 end
 
-local function SkinIcon(self) -- Thanks to SinaC
+local function SkinGuildRecipes(ButtonOrSpellID)
+	if not ButtonOrSpellID then return end
+	local button
+		if type(ButtonOrSpellID) == "number" then
+			local buttonName = "SkilletFrameTradeButton-Guild Recipes-"..tostring(ButtonOrSpellID)
+			button = _G[buttonName]
+		else
+			button = ButtonOrSpellID
+		end
+	if button then
+		local texture = button:GetNormalTexture()
+			if not texture then
+			texture = _G[button:GetName().."Icon"]
+			
+			button:ClearAllPoints()
+			button:SetPoint("BOTTOMLEFT", SkilletRankFrame, "TOPLEFT", 0, 3) --Adjust position.
+	end
+	
+	if texture then
+		button:SetTemplate("Default", true)
+		texture:SetDrawLayer('OVERLAY') -- Make sure we can see the Icons.
+		texture:ClearAllPoints()
+		texture:Point("TOPLEFT", 2, -2)
+		texture:Point("BOTTOMRIGHT", -2, 2)
+		texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		button:SetHighlightTexture(nil)
+		button:HookScript("OnEnter", SetModifiedBackdrop)
+		button:HookScript("OnLeave", SetOriginalBackdrop)
+		end
+	end	
+end
+
+local function SkinIcon(self)
 
 	if SkilletDoBasic_Campfire then SkinButton(SkilletDoBasic_Campfire) end
 	if SkilletDoProspecting    then SkinButton(SkilletDoProspecting)    end
@@ -74,17 +107,18 @@ local function SkinIcon(self) -- Thanks to SinaC
 	if SkilletDoMilling        then SkinButton(SkilletDoMilling)        end
 
 	
-	if 3908  then SkinButton(3908)  end -- Tailoring
-	if 53428 then SkinButton(53428) end -- Runeforging
-	if 3273  then SkinButton(3273)  end -- Firstaid
-	if 2656  then SkinButton(2656)  end -- Smelting
-	if 2550  then SkinButton(2550)  end -- Cooking
-	if 45357 then SkinButton(45357) end -- Inscription
+	if 2259  then SkinButton(2259)  end -- Alchemy	
 	if 2018  then SkinButton(2018)  end -- Blacksmithing
-	if 2259  then SkinButton(2259)  end -- Alchemy
 	if 7411  then SkinButton(7411)  end -- Enchanting
-	if 4036  then SkinButton(4036)  end -- Engineering
-	if 25229 then SkinButton(25229) end -- Jewelcrafting 
+	if 4036  then SkinButton(4036)  end -- Engineering	
+	if 45357 then SkinButton(45357) end -- Inscription
+	if 25229 then SkinButton(25229) end -- Jewelcrafting
+	if 2108  then SkinButton(2108)  end -- Leatherworking
+	if 2656  then SkinButton(2656)  end -- Smelting
+	if 3908  then SkinButton(3908)  end -- Tailoring
+	if 2550  then SkinButton(2550)  end -- Cooking	
+	if 3273  then SkinButton(3273)  end -- Firstaid
+	if 53428 then SkinButton(53428) end -- Runeforging
 
 -- Stop this FPS Killer
 	local icon = _G["SkilletHideUncraftableRecipes"]
@@ -146,6 +180,7 @@ local function SkilletFrameOnShow(self)
 				"SkilletQueueManagementParent",
 				"SkilletSkillTooltip",
 				"SkilletStandalonQueue",
+				"SkilletViewCraftersParent",
 				}
 				
 		for _, object in pairs(StripAllTextures) do
@@ -158,6 +193,7 @@ local function SkilletFrameOnShow(self)
 				"SkilletReagentParent",
 				"SkilletQueueParent",
 				"SkilletQueueManagementParent",
+				"SkilletViewCraftersParent",
 				}
 
 	local SetTemplateT = {-- Transparent Texture
@@ -198,6 +234,7 @@ local function SkilletFrameOnShow(self)
 		SkilletFrameCloseButton:ClearAllPoints()
 		SkilletFrameCloseButton:SetPoint("TOPRIGHT", SkilletFrame, "TOPRIGHT", 0, 0)
 		SkilletTradeSkillLinkButton:SetPoint("RIGHT", SkilletShowOptionsButton, "LEFT", 0, 0)
+		SkilletViewCraftersButton:SetPoint("RIGHT", SkilletQueueManagementButton, "LEFT", -5, 0)
 		
 -- Skin Tooltips		
 		SkilletTradeskillTooltip:StripTextures()
@@ -263,7 +300,20 @@ local function SkilletFrameOnUpdate(self, event, ...)
 		SkilletDoMilling:ClearAllPoints()
 		SkilletDoMilling:SetPoint("BOTTOMRIGHT", SkilletRankFrame, "TOPRIGHT", -78, 3)
 	end
-		
+	
+	SkinGuildRecipes(2259) -- Alchemy
+	SkinGuildRecipes(2018) -- Blacksmithing
+	SkinGuildRecipes(7411) -- Enchanting
+	SkinGuildRecipes(4036) -- Engineering
+	SkinGuildRecipes(45357)-- Inscription
+	SkinGuildRecipes(25229)-- Jewelcrafting
+	SkinGuildRecipes(2108) -- Leatherworking
+	SkinGuildRecipes(2656) -- Smelting
+	SkinGuildRecipes(3908) -- Tailoring
+	SkinGuildRecipes(53428)-- Runeforging
+	SkinGuildRecipes(3273) -- Firstaid
+	SkinGuildRecipes(2550) -- Cooking
+
 	local Skillet = _G.Skillet
 	x = 0
 	local player = UnitName("player")
@@ -329,6 +379,7 @@ local SkinSkillet = CreateFrame("Frame")
 				"SkilletQueueDeleteButton",
 				"SkilletQueueSaveButton",
 				"SkilletRecipeNotesButton",
+				"SkilletViewCraftersButton",
 				}
 
 		for _, button in pairs(buttons) do
