@@ -33,7 +33,7 @@ function SetOriginalBackdrop(self)
 		end
 	else
 		if self.backdrop then self = self.backdrop end
-		self:SetBackdropBorderColor(unpack(c["media"].bordercolor))	
+		self:SetBackdropBorderColor(unpack(c["media"].bordercolor))
 	end
 end
 
@@ -52,7 +52,7 @@ local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
 			if not texture then
 			texture = _G[button:GetName().."Icon"]
 	end
-	
+
 	if texture then
 		button:SetTemplate("Default", true)
 		texture:SetDrawLayer('OVERLAY') -- Make sure we can see the Icons.
@@ -99,6 +99,26 @@ local function SkinGuildRecipes(ButtonOrSpellID)
 	end	
 end
 
+local function SkinReagentButton(ButtonName)
+	if not ButtonName then return end
+	local button = ButtonName
+	if button then
+		local texture = button:GetNormalTexture()
+			if not texture then
+			texture = _G[button:GetName().."Icon"]
+	end
+
+	if texture then
+		button:SetTemplate("Default", true)
+		texture:SetDrawLayer('OVERLAY') -- Make sure we can see the Icons.
+		texture:ClearAllPoints()
+		texture:Point("TOPLEFT", 2, -2)
+		texture:Point("BOTTOMRIGHT", -2, 2)
+		texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		end
+	end
+end
+
 local function SkinIcon(self)
 
 	if SkilletDoBasic_Campfire then SkinButton(SkilletDoBasic_Campfire) end
@@ -106,7 +126,7 @@ local function SkinIcon(self)
 	if SkilletDoDisenchant     then SkinButton(SkilletDoDisenchant)     end
 	if SkilletDoMilling        then SkinButton(SkilletDoMilling)        end
 
-	
+
 	if 2259  then SkinButton(2259)  end -- Alchemy	
 	if 2018  then SkinButton(2018)  end -- Blacksmithing
 	if 7411  then SkinButton(7411)  end -- Enchanting
@@ -250,7 +270,7 @@ local function SkilletFrameOnShow(self)
 			queDelete:SetWidth(14)
 			queDelete:SetHeight(14)
 	end
-		
+
 -- Enchantrix ------------------------------------------------------------------------------------------------------------
 	-- Frames
 	if Enchantrix_BarkerOptions_Frame then
@@ -274,6 +294,28 @@ local function SkilletFrameOnShow(self)
 		cSkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
 	end
 -- Enchantrix ------------------------------------------------------------------------------------------------------------
+end
+
+local function SkinReagentIcon(self, event, ...)
+	
+	local ReagentIcons = {
+		"SkilletSkillIcon",
+		"SkilletReagent1Icon",
+		"SkilletReagent2Icon",
+		"SkilletReagent3Icon",
+		"SkilletReagent4Icon",
+		"SkilletReagent5Icon",
+		"SkilletReagent6Icon",
+		"SkilletReagent7Icon",
+		"SkilletReagent8Icon",
+		"SkilletReagent9Icon",
+		"SkilletReagent10Icon", -- Is there only 10?
+		}
+
+		for _, button in pairs(ReagentIcons) do
+						SkinReagentButton(_G[button])
+		end	
+	
 end
 
 local function SkilletFrameOnUpdate(self, event, ...)
@@ -464,6 +506,8 @@ local SkinSkillet = CreateFrame("Frame")
 	-- Skin Icons
 		local icon = _G["SkilletHideUncraftableRecipes"]
 		icon:SetScript("OnUpdate", SkinIcon)
+		local reagent = _G["SkilletReagentParent"]
+		reagent:SetScript("OnUpdate", SkinReagentIcon)
 		
 	-- Plugin Buttons	
 		local plugin = _G["SkilletPluginButton"]
