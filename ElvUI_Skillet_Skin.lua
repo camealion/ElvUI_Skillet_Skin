@@ -24,7 +24,7 @@ function SetModifiedBackdrop(self)
 end
 
 function SetOriginalBackdrop(self)
-	if Tukiu then
+	if Tukui then
 		local color = RAID_CLASS_COLORS[t.myclass]
 		if c["general"].classcolortheme == true then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
