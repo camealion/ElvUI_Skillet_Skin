@@ -2,7 +2,7 @@
 ## Title: |cff1784d1ElvUI|r Skillet Skin
 ## Notes: Skillet Addon Skin For ElvUI/Tukui
 ## Author: Camealion
-## Version: 1.1
+## Version: 1.2
 ## RequiredDeps: Skillet
 ## OptionalDeps: Tukui, ElvUI
 
