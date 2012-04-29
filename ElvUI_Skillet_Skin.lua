@@ -1,16 +1,4 @@
-﻿if ElvUI then
-	local E, L, DF = unpack(ElvUI)
-	local S = E:GetModule('Skins')
-	c = E
-	--DEFAULT_CHAT_FRAME:AddMessage("ElvUI is loaded")
-else
-	local T, C, L = unpack(Tukui)
-	c = C
-	t = T
-	--DEFAULT_CHAT_FRAME:AddMessage("Tukui is loaded")
-end
-
-local Skillet = _G.Skillet
+﻿local Skillet = _G.Skillet
 
 function SetModifiedBackdrop(self)
 	if Tukui then
@@ -422,6 +410,7 @@ local SkinSkillet = CreateFrame("Frame")
 				"SkilletQueueSaveButton",
 				"SkilletRecipeNotesButton",
 				"SkilletViewCraftersButton",
+				"SkilletMerchantBuyFrameButton",
 				}
 
 		for _, button in pairs(buttons) do
@@ -490,7 +479,7 @@ local SkinSkillet = CreateFrame("Frame")
 		
 	-- Skin Scrollbar	
 		cSkinScrollBar(SkilletSkillListScrollBar, 5)
-		
+
 	-- Do some stuff when SkilletFrame is shown.
 		local SkilletOnload = _G["SkilletSkillListParent"]
         SkilletOnload:SetScript("OnShow", SkilletFrameOnShow)
